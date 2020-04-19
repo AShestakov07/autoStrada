@@ -1,0 +1,65 @@
+try:
+    while True:
+        x = input().split()
+        from datetime import datetime
+        if len(x) > 5 or len(x) <5:
+            print("BLAD")
+            continue
+
+        if len(x[0]) > 6 or len(x[0]) < 6:
+            print("BLAD")
+            continue
+
+        import re
+        match = re.findall(r'[ABCDEFGHIJKLMNOPQRSTUVWXYZ][ABCDEFGHIJKLMNOPQRSTUVWXYZ]\d\d\d\d', x[0])
+        if match:
+            try:
+                datetime_object1 = datetime.strptime(x[3], '%H:%M')
+            except ValueError:
+                print("BLAD")
+                continue
+
+            try:
+                datetime_object2 = datetime.strptime(x[4], '%H:%M')
+            except ValueError:
+                print("BLAD")
+                continue
+
+            datetime_object3 = datetime_object2 - datetime_object1
+            s = datetime_object3.seconds
+            godziny = s // 60
+
+
+            x[2] = int(x[2])
+            speed = (x[2] / godziny) * 0.06
+            j = []
+            j.append(speed)
+            for i in j:
+                 speed1 = '%.2f' % i
+
+        else:
+            print("BLAD")
+            continue
+
+
+        def samochod():
+            if speed > 140:
+                print(x[0], 'M', speed1)
+            else:
+                print(x[0], '.', speed1)
+
+        def ciezarowka():
+            if speed > 80:
+                print(x[0], 'M', speed1)
+            else:
+                print(x[0], '.', speed1)
+
+        if x[1] == 'S':
+            samochod()
+        elif x[1] == 'C':
+            ciezarowka()
+        else:
+            print('BLAD')
+
+except EOFError:
+    pass
